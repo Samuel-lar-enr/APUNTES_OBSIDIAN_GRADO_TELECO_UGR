@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "dcfeef08f1cdd84c",
+    "type": "split",
+    "children": [
+      {
+        "id": "d2282722be8e15e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "28b53620dd715a1a",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nueva pestaña"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d47186f33d5dbba0",
+    "type": "split",
+    "children": [
+      {
+        "id": "5327fcb1ff893b23",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7b8bd6e27843445a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "06ad5c02a9a3c75c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "0105146ad2822e51",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "87a5b6a8f3066cbd",
+    "type": "split",
+    "children": [
+      {
+        "id": "bf01c798bf626753",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "65e266450f3ec30a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA/ÁLGEBRA LINEAL Y GEOMETRÍA.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes de ÁLGEBRA LINEAL Y GEOMETRÍA"
+            }
+          },
+          {
+            "id": "622eb93193684c24",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA/ÁLGEBRA LINEAL Y GEOMETRÍA.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes de ÁLGEBRA LINEAL Y GEOMETRÍA"
+            }
+          },
+          {
+            "id": "caa6d456aeeb15bb",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "11f0ab54bf77d0b1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "b6187e61aa27de34",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA/ÁLGEBRA LINEAL Y GEOMETRÍA.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema de ÁLGEBRA LINEAL Y GEOMETRÍA"
+            }
+          },
+          {
+            "id": "7fe40256f4c5f943",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "7b8bd6e27843445a",
+  "lastOpenFiles": [
+    "1/1.1/FIE-H/FUNDAMENTOS DE INFORMÁTICA.md",
+    "1/1.1/FIE-H/APUNTES FUNDAMENTOS DE  INFORMATICA.md",
+    "1/1.1/FIE-EMP/FUNDAMENTOS DE  EMPRESA.md",
+    "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA/APUNTES ÁLGEBRA LINEAL Y GEOMETRÍA.md",
+    "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA/ÁLGEBRA LINEAL Y GEOMETRÍA.md",
+    "1/1.1/APUNTES ANALISIS MATEMÁTICO/APUNTES ANALISIS MATEMÁTICO.md",
+    "1/1.1/APUNTES ANALISIS MATEMÁTICO/ANALISIS MATEMÁTICO 1.md",
+    "Sin título.canvas",
+    "INSTRUCCIONES/Instrucciones para IA II Edición.md",
+    "INSTRUCCIONES/Instrucciones para IA.md",
+    "INSTRUCCIONES",
+    "1/1.1/FUNDAMENTOS DE PROGRAMACIÓN/FUNDAMENTOS DE PROGRAMACIÓN.md",
+    "1/1.1/FIE-EMP",
+    "1/1.1/FIE-H",
+    "1/1.1/FUNDAMENTOS DE PROGRAMACIÓN",
+    "1/1.1/APUNTES ANALISIS MATEMÁTICO",
+    "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA",
+    "Bienvenido.md",
+    "1/1.1",
+    "1"
+  ]
+}
