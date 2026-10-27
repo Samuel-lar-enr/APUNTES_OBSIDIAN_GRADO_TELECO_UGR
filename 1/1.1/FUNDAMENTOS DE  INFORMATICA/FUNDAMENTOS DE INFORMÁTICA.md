@@ -1527,4 +1527,874 @@ El **hardware** son los **componentes físicos** del computador. El software le 
 ---
 
 > [!Summary] Fin de las secciones expandidas
-> Estas son todas las secciones que faltaban por expandir. El resto del apunte (secciones 1, 2.3, 2.5-2.8, 2.10, 2.12, 2.13, 2.16, 2.18, 2.19, 2.23, 2.25, 2.32, 2.36, 2.39, 2.41, 2.42, y secciones 3-12) permanece exactamente igual que en la versión anterior.
+> Estas son todas las secciones que faltaban por expandir. El resto del apunte (secciones 1, 2.3, 2.5-2.8, 2.10, 2.12, 2.13, 2.16, 2.18, 2.19, 2.23, 2.25, 2.32, 2.36, 2.39, 2.41, 2.42, y secciones 3-12) permanece exactamente igual que en la versión anterior.  
+
+# Tema 2. Representación de la información en computadores
+
+> [!Note] Prerrequisitos
+> - Saber escribir números en binario y hexadecimal: [[#2. L2.0 Sistemas de numeración usuales en informática]]
+> - Entender qué es un bit y un byte.
+> - Manejar potencias de 2 y de 16.
+> - Saber que un byte son 8 bits y que $1\ \text{KiB}=1024\ \text{B}$, mientras que $1\ \text{kB}=1000\ \text{B}$.
+
+## Índice
+1. [[#1. Motivación y contexto]]
+2. [[#2. L2.0 Sistemas de numeración usuales en informática]]
+3. [[#3. L2.1 Nociones básicas sobre representación de la información]]
+4. [[#4. L2.2 Representación de textos]]
+5. [[#5. L2.3 Representación de sonidos]]
+6. [[#6. L2.4 Representación de imágenes]]
+7. [[#7. L2.5 Representación de vídeo]]
+8. [[#8. L2.6 Representación de números enteros]]
+9. [[#9. L2.7 Representación de números reales]]
+10. [[#10. Resumen de fórmulas]]
+11. [[#11. Mapeo de ejercicios]]
+12. [[#12. Errores comunes y consejos]]
+13. [[#13. Síntesis]]
+14. [[#14. Anexos]]
+15. [[#15. Enlaces externos]]
+
+> [!Important] Verificación de enlaces
+> Los títulos del índice coinciden exactamente con los títulos de las secciones.
+
+## 1. Motivación y contexto
+
+Un computador solo almacena bits: ceros y unos. La misma secuencia puede representar un número, una letra, una muestra de sonido, un píxel o una instrucción. Por eso, para interpretar correctamente la información no basta con ver los bits: hace falta conocer la convención de codificación.
+
+Este tema responde a tres preguntas:
+- ¿Cómo se escribe un mismo valor en distintas bases?
+- ¿Cómo se codifica texto, sonido, imagen y vídeo?
+- ¿Cómo se representan números enteros y reales con un número fijo de bits, y qué límites aparecen?
+
+> [!Connection] Conexión interna
+> Los sistemas de numeración de [[#2. L2.0 Sistemas de numeración usuales en informática]] se reutilizan en [[#4. L2.2 Representación de textos]], [[#8. L2.6 Representación de números enteros]] y [[#9. L2.7 Representación de números reales]].
+
+## 2. L2.0 Sistemas de numeración usuales en informática
+
+### 2.1. Sistema posicional
+
+> [!Definition] Sistema posicional
+> En base $b$, cada cifra $a_i$ aporta el valor $a_i\cdot b^i$, donde $i$ es la posición respecto a la coma. Las cifras permitidas van de $0$ a $b-1$.
+
+Para un número con parte entera y fraccionaria:
+$$
+\text{Valor}= \ldots + a_2b^2+a_1b^1+a_0b^0+a_{-1}b^{-1}+a_{-2}b^{-2}+\ldots
+$$
+
+**Desglose**:
+- $b$ es la base.
+- $a_i$ es la cifra en la posición $i$.
+- $b^i$ es el peso de esa posición.
+- La coma separa potencias no negativas de potencias negativas.
+
+> [!Example] Ejemplo: $4567{,}28$
+> - $4$ aporta $4\cdot 10^3=4000$.
+> - $5$ aporta $5\cdot 10^2=500$.
+> - $6$ aporta $6\cdot 10^1=60$.
+> - $7$ aporta $7\cdot 10^0=7$.
+> - $2$ aporta $2\cdot 10^{-1}=0{,}2$.
+> - $8$ aporta $8\cdot 10^{-2}=0{,}08$.
+> Suma: $4000+500+60+7+0{,}2+0{,}08=4567{,}28$.
+
+> [!NonExample] Hexadecimal no es “otro tipo de dato”
+> Hexadecimal es una escritura compacta de grupos de 4 bits. No cambia el valor ni el tipo de información.
+
+### 2.2. Binario
+
+En base $2$, solo se usan $0$ y $1$. Los pesos son $1,2,4,8,16,\ldots$ hacia la izquierda.
+
+> [!Algorithm] Decimal a binario por divisiones sucesivas
+> 1. Divide el número entre 2.
+> 2. Guarda el resto.
+> 3. Repite con el cociente hasta que sea 0.
+> 4. Lee los restos en orden inverso.
+
+> [!Example] Ejercicio 2.0: $(00001001)_2$
+> **Datos**: patrón de 8 bits $00001001$.
+> **Solución**:
+> - Posición 3: $2^3=8$.
+> - Posición 0: $2^0=1$.
+> - Suma: $8+1=9$.
+> Resultado: $(00001001)_2=(9)_{10}$.
+
+> [!Example] Decimal 74 a binario
+> **Datos**: $74_{10}$.
+> **Solución**:
+> - $74/2=37$ resto $0$.
+> - $37/2=18$ resto $1$.
+> - $18/2=9$ resto $0$.
+> - $9/2=4$ resto $1$.
+> - $4/2=2$ resto $0$.
+> - $2/2=1$ resto $0$.
+> - $1/2=0$ resto $1$.
+> Leyendo restos al revés: $(74)_{10}=(1001010)_2$.
+> Comprobación: $64+8+2=74$.
+
+> [!Example] Parte fraccionaria $0{,}423$ a binario, 6 bits
+> **Datos**: $0{,}423$.
+> **Solución**: multiplicar por 2 y quedarse con la parte entera:
+> - $0{,}423\cdot2=0{,}846\to0$
+> - $0{,}846\cdot2=1{,}692\to1$
+> - $0{,}692\cdot2=1{,}384\to1$
+> - $0{,}384\cdot2=0{,}768\to0$
+> - $0{,}768\cdot2=1{,}536\to1$
+> - $0{,}536\cdot2=1{,}072\to1$
+> Resultado truncado: $(0{,}423)_{10}\approx(0{,}011011)_2$.
+> Comprobación: $0{,}011011_2=0{,}421875$; diferencia $0{,}001125$.
+
+> [!Warning] No confundir truncar con redondear
+> En el ejemplo se trunca a 6 bits; no se redondea al más cercano.
+
+### 2.3. Hexadecimal
+
+Cada cifra hexadecimal equivale a 4 bits porque $16=2^4$. Cifras: $0$–$9$ y $A$–$F$, con $A=10,\ldots,F=15$.
+
+> [!Example] $(2A6)_{16}$ a decimal
+> **Datos**: $2A6_{16}$.
+> **Solución**:
+> - $2\cdot16^2=2\cdot256=512$.
+> - $A\cdot16^1=10\cdot16=160$.
+> - $6\cdot16^0=6$.
+> Suma: $512+160+6=678$.
+> Resultado: $(2A6)_{16}=(678)_{10}$.
+
+> [!Example] $(678)_{10}$ a hexadecimal
+> **Solución**:
+> - $678/16=42$ resto $6$.
+> - $42/16=2$ resto $10=A$.
+> - $2/16=0$ resto $2$.
+> Leyendo restos al revés: $(678)_{10}=(2A6)_{16}$.
+
+> [!Example] Binario a hexadecimal: $11100010110011{,}000111$
+> Agrupar de 4 en 4 desde la coma:
+> - Parte entera: $0011\ 1000\ 1011\ 0011\to 3,8,B,3$.
+> - Parte fraccionaria: $0001\ 1100\to 1,C$.
+> Resultado: $(38B3{,}1C)_{16}$.
+
+> [!Example] Hexadecimal a binario: $2A6$
+> $2\to0010$, $A\to1010$, $6\to0110$.
+> Resultado: $(2A6)_{16}=(0010\ 1010\ 0110)_2$.
+
+### 2.4. Aritmética binaria
+
+> [!Algorithm] Suma binaria
+> 1. Alinea por pesos.
+> 2. Suma cada columna con el acarreo.
+> 3. Si la suma local es $2$, se escribe $0$ y se lleva $1$.
+> 4. Si es $3$, se escribe $1$ y se lleva $1$.
+
+> [!Example] $(11010)_2+(10111)_2$
+> **Datos**: $11010_2=26$, $10111_2=23$.
+> **Solución**:
+> $$
+> \begin{array}{r}
+>   11010\\
+> +10111\\
+> \hline
+> 110001
+> \end{array}
+> $$
+> Resultado: $(110001)_2=49$. Comprobación decimal: $26+23=49$.
+
+> [!Example] Producto binario $10110\cdot101$
+> **Solución**:
+> - $10110\cdot1=10110$.
+> - $10110\cdot0=00000$.
+> - $10110\cdot1=10110$ desplazado.
+> Suma de productos parciales: $1101110_2$.
+
+> [!Summary] Resumen ejecutivo L2.0
+> Cambiar de base cambia la escritura, no el valor. Binario y hexadecimal son escrituras del mismo tipo de información; hexadecimal abrevia grupos de 4 bits. La aritmética posicional sigue las mismas reglas que en decimal, pero agrupando de 2 en 2.
+
+## 3. L2.1 Nociones básicas sobre representación de la información
+
+### 3.1. Patrón de bits
+
+> [!Definition] Patrón de bits
+> Secuencia de ceros y unos. Por sí sola no indica qué representa; necesita una interpretación.
+
+Ejemplo: $01000001$ puede ser:
+- entero sin signo: $65$;
+- carácter ASCII: `A`;
+- parte de un color, una muestra de sonido o una instrucción.
+
+> [!Example] ¿Cuántos bits para distinguir 5 objetos?
+> Con $n$ bits hay $2^n$ patrones.
+> - $2$ bits: $4$ patrones, no bastan.
+> - $3$ bits: $8$ patrones, bastan.
+> Regla: $2^n\ge m$, luego $n_{\min}=\lceil\log_2 m\rceil$.
+
+### 3.2. Redundancia
+
+> [!Definition] Redundancia
+> Añadir bits de control a los datos para detectar o corregir errores.
+
+- Datos: $n$ bits.
+- Control: $k$ bits.
+- Total: $n+k$ bits.
+
+> [!Example] Letra del DNI
+> La letra se calcula con el resto de dividir el número entre 23 y una tabla fija. Ejemplo: $12345678\bmod 23=14\to Z$. Recalcular la letra permite detectar incoherencias.
+
+> [!Example] Paridad par
+> Se añade un bit para que el total de unos sea par.
+> - Datos $1011$ tienen 3 unos; se añade $1$: total 4 unos, válido.
+> - Si llega $1001$ con paridad $1$, hay 3 unos: error.
+> La paridad detecta un número impar de cambios, pero no corrige ni detecta siempre dos cambios.
+
+> [!NonExample] Paridad no es corrección
+> La paridad por sí sola no indica qué bit hay que corregir. Para corregir hace falta más información de control.
+
+### 3.3. Compresión
+
+> [!Definition] Compresión
+> Cambiar la representación de los datos para ocupar menos espacio o transmitir menos datos.
+
+Factor de compresión:
+$$
+f_c=\frac{C_a}{C_d}
+$$
+donde $C_a$ es el tamaño antes y $C_d$ el tamaño después.
+
+Porcentaje que queda:
+$$
+P_c=\frac{C_d}{C_a}\cdot100
+$$
+El ahorro es $100-P_c$.
+
+> [!Example] De 14 MB a 5 MB
+> **Datos**: $C_a=14\ \text{MB}$, $C_d=5\ \text{MB}$.
+> **Solución**:
+> - Ahorro: $14-5=9\ \text{MB}$.
+> - Factor: $14/5=2{,}8:1$.
+> - Porcentaje que queda: $5/14\cdot100\approx35{,}7\%$.
+> - Ahorro: $100-35{,}7=64{,}3\%$.
+
+> [!Definition] Sin pérdidas y con pérdidas
+> - Sin pérdidas: se recuperan exactamente los datos originales. Ejemplos: ZIP, PNG, FLAC.
+> - Con pérdidas: se recupera una aproximación. Ejemplos: JPEG, MP3, MPEG.
+
+> [!NonExample] “Sin pérdidas” no mejora la calidad
+> Guardar en PNG una imagen que ya perdió información en JPEG no recupera los detalles perdidos.
+
+> [!Summary] Resumen ejecutivo L2.1
+> Un patrón de bits necesita interpretación. La redundancia añade control para detectar o corregir errores. La compresión reduce espacio; la distinción clave es si la recuperación es exacta o aproximada.
+
+## 4. L2.2 Representación de textos
+
+### 4.1. Codificación
+
+Para enviar texto con números hace falta una tabla compartida entre emisor y receptor.
+
+> [!Example] Texto «Hoy» en ASCII/UTF-8
+> - `H` $\to48_{16}=01001000_2$.
+> - `o` $\to6F_{16}=01101111_2$.
+> - `y` $\to79_{16}=01111001_2$.
+> Cada byte se escribe con dos cifras hexadecimales.
+
+> [!Example] Repertorio de 105 caracteres
+> $2^6=64<105\le128=2^7$, luego se necesitan 7 bits.
+
+### 4.2. ASCII
+
+ASCII usa 7 bits y tiene 128 posiciones. Al guardarlo en un byte, se suele añadir un bit 0 a la izquierda.
+
+> [!Example] `j` en ASCII
+> Fila $6$, columna $A$: $6A_{16}=106_{10}=01101010_2$.
+> El carácter `0` tiene código $30_{16}$, no es el número 0.
+
+> [!Example] Latin-1 y `ñ`
+> En ISO-8859-1, `ñ` se representa con $F1_{16}=11110001_2$. Esa correspondencia no es válida como byte UTF-8 aislado.
+
+> [!NonExample] ASCII no cubre todos los alfabetos
+> Un repertorio de 256 posiciones no basta para mezclar latín, griego, chino y árabe sin cambiar de tabla.
+
+### 4.3. Unicode y UTF
+
+> [!Definition] Punto de código
+> Número que Unicode asigna a un carácter. Se escribe como `U+` seguido de hexadecimal. Ejemplo: `A` es $U+0041$.
+
+Unicode no significa “siempre 2 bytes”. Un carácter se codifica con UTF-8, UTF-16 o UTF-32.
+
+| Punto de código | Bytes en UTF-8 | Patrón |
+|---|---:|---|
+| $U+0000$–$U+007F$ | 1 | `0xxxxxxx` |
+| $U+0080$–$U+07FF$ | 2 | `110xxxxx 10xxxxxx` |
+| $U+0800$–$U+FFFF$ | 3 | `1110xxxx 10xxxxxx 10xxxxxx` |
+| $U+10000$–$U+10FFFF$ | 4 | `11110xxx 10xxxxxx 10xxxxxx 10xxxxxx` |
+
+> [!Example] Codificar `ñ` en UTF-8
+> **Datos**: `ñ` es $U+00F1=241_{10}=F1_{16}$.
+> **Solución**:
+> - Está entre $U+0080$ y $U+07FF$: 2 bytes.
+> - $241=11110001_2$.
+> - El patrón de 2 bytes ofrece $5+6=11$ huecos; se completa con ceros: $00011110001$.
+> - Grupos: $00011$ y $110001$.
+> - Primer byte: $11000011=C3_{16}$.
+> - Segundo byte: $10110001=B1_{16}$.
+> Resultado: `ñ` $\to C3\ B1$ en UTF-8.
+
+> [!Example] Ejercicio 1: recodificar UTF-16 a UTF-8
+> **Datos**:
+> - $18.325$ caracteres $U+0000$–$U+007F$.
+> - $127$ caracteres $U+0080$–$U+07FF$.
+> - $14$ caracteres $U+0800$–$U+FFFF$.
+> - En UTF-16 se suponen 2 bytes por carácter.
+> **Solución**:
+> - UTF-8: $18.325\cdot1+127\cdot2+14\cdot3=18.325+254+42=18.621\ \text{B}$.
+> - Total caracteres: $18.325+127+14=18.466$.
+> - UTF-16: $18.466\cdot2=36.932\ \text{B}$.
+> - Factor: $36.932/18.621\approx1{,}98:1$.
+
+> [!Example] Ejercicio 2: archivo UTF-8 de 139 KiB
+> **Datos**:
+> - $1.024$ caracteres de 3 bytes.
+> - $4.096$ caracteres de 2 bytes.
+> - El resto, 1 byte por carácter.
+> - En UTF-16 se suponen 2 bytes por carácter.
+> **Solución**:
+> - $1.024\cdot3=3\ \text{KiB}$.
+> - $4.096\cdot2=8\ \text{KiB}$.
+> - Ocupan $11\ \text{KiB}$.
+> - Quedan $139-11=128\ \text{KiB}=131.072\ \text{B}$, luego $131.072$ caracteres de 1 byte.
+> - Total caracteres: $1.024+4.096+131.072=136.192$.
+> - UTF-16: $136.192\cdot2=272.384\ \text{B}=266\ \text{KiB}$.
+> Opción a) $266\ \text{KiB}$.
+
+> [!NonExample] Unicode no es “2 bytes por carácter”
+> En UTF-16, muchos caracteres usan 2 bytes, pero otros usan 4. En UTF-8, `A` ocupa 1 byte y `ñ` ocupa 2.
+
+> [!Summary] Resumen ejecutivo L2.2
+> ASCII es un código de 7 bits para 128 caracteres. Latin-1 amplía a 8 bits. Unicode asigna puntos de código universales; UTF-8 y UTF-16 son formas de guardar esos puntos de código en bytes. Un carácter visible puede combinar varios puntos de código.
+
+## 5. L2.3 Representación de sonidos
+
+### 5.1. Digitalizar
+
+> [!Definition] Digitalizar una señal
+> Discretizar el tiempo mediante muestreo y la amplitud mediante cuantificación.
+
+- Frecuencia de muestreo: $f_s$ muestras por segundo.
+- Período de muestreo: $T_s=1/f_s$.
+- Cuantificación con $n_s$ bits: $2^{n_s}$ niveles.
+
+> [!Theorem] Nyquist–Shannon
+> Para una señal limitada a una frecuencia máxima $B$, el límite teórico de muestreo es $2B$. En la práctica se usa $f_s>2B$ y se filtra antes de muestrear.
+
+> [!Example] $f_s=44.100\ \text{muestras/s}$
+> $T_s=1/44.100\approx22{,}7\ \mu\text{s}$.
+
+> [!Example] Aliasing
+> Si se muestrea demasiado poco, dos señales distintas pueden producir las mismas muestras. Aumentar bits de amplitud no resuelve el aliasing; el problema es temporal.
+
+### 5.2. PCM y tasa de bits
+
+En PCM se asigna una palabra binaria a cada muestra.
+
+Tasa de bits:
+$$
+R=f_s\cdot n_s\cdot c\ \text{bit/s}
+$$
+donde $c$ es el número de canales.
+
+Tamaño de datos:
+$$
+C(t)=\frac{R\cdot t}{8}\ \text{bytes}
+$$
+
+> [!Example] CD estéreo
+> $f_s=44.100$, $n_s=16$, $c=2$.
+> $$
+> R=44.100\cdot16\cdot2=1.411.200\ \text{bit/s}.
+> $$
+> 1 minuto:
+> $$
+> C=\frac{1.411.200\cdot60}{8}=10.584.000\ \text{B}\approx10{,}584\ \text{MB}.
+> $$
+
+> [!Example] Ejercicio 1: frecuencia de muestreo
+> **Datos**: audio estéreo, $20\ \text{s}$, $16$ bits/muestra, $625\ \text{KiB}$ PCM.
+> **Solución**:
+> - $625\ \text{KiB}=625\cdot1024=640.000\ \text{B}$.
+> - Despejando:
+> $$
+> f_s=\frac{8C}{n_s c t}=\frac{8\cdot640.000}{16\cdot2\cdot20}=8.000\ \text{Hz}.
+> $$
+> Opción a) $8\ \text{kHz}$.
+
+> [!Example] Ejercicio 2: Nyquist
+> Para frecuencia máxima $f_{\max}$, el límite mínimo teórico es $2f_{\max}$. Respuesta a).
+
+### 5.3. Formatos y transmisión
+
+- WAV/AIFF: a menudo PCM.
+- FLAC: sin pérdidas.
+- MP3/AAC/Vorbis: con pérdidas.
+- Contenedor y códec son cosas distintas.
+- Streaming: el búfer desacopla llegadas irregulares y reproducción regular.
+
+> [!NonExample] “El doble de tasa es condición universal”
+> En streaming se necesita margen, pero el doble no es una condición universal; importan variaciones, búfer y sobrecarga.
+
+> [!Summary] Resumen ejecutivo L2.3
+> El sonido se digitaliza muestreando en tiempo y cuantificando amplitud. La tasa PCM es $f_s\cdot n_s\cdot c$. Nyquist exige muestrear por encima del doble de la frecuencia máxima. Los códecs con pérdidas descartan información perceptualmente menos relevante.
+
+## 6. L2.4 Representación de imágenes
+
+### 6.1. Percepción
+
+- Integración espacial: el ojo no resuelve detalles muy próximos.
+- Integración temporal: una secuencia de imágenes puede percibirse como movimiento.
+- Color: RGB es mezcla aditiva de luz; CMYK es mezcla sustractiva de tintas.
+- Y’CbCr separa luma y crominancia.
+- HSL es un modelo para elegir colores; su L no es luminancia física.
+
+> [!NonExample] RGB y CMYK no son intercambiables sin más
+> RGB combina luces; CMYK describe tintas que absorben luz. La conversión depende del dispositivo.
+
+### 6.2. Mapa de bits y vectorial
+
+- Mapa de bits: rejilla de píxeles; cada píxel guarda un color o índice.
+- Vectorial: objetos geométricos con atributos; se redibujan al escalar.
+
+> [!NonExample] Vectorial no siempre ocupa menos
+> En gráficos sencillos puede ocupar menos, pero no es una regla universal.
+
+### 6.3. Tamaño de imagen sin comprimir
+
+$$
+C=\frac{\text{ancho}\cdot\text{alto}\cdot\text{bits por píxel}}{8}\ \text{bytes}
+$$
+
+> [!Example] Ejercicio 1: imagen RGB de $10\times15$ píxeles y 24 bits
+> **Datos**: $10\times15$, $24$ bits/píxel.
+> **Solución**:
+> $$
+> C=\frac{10\cdot15\cdot24}{8}=\frac{3600}{8}=450\ \text{B}.
+> $$
+> Opción c) $450\ \text{B}$.
+
+> [!Example] Ejercicio 2: escala de grises $256\times256$, 8 bits
+> **Datos**: $256\times256$, $8$ bits/píxel $=1\ \text{B/píxel}$.
+> **Solución**:
+> $$
+> 256\cdot256=65.536\ \text{B}.
+> $$
+> En KiB: $65.536/1024=64\ \text{KiB}$.
+
+### 6.4. Formatos y compresión
+
+- BMP: sin compresión, color directo.
+- TIFF: flexible; puede usar compresión sin pérdidas o con pérdidas según configuración.
+- PNG: sin pérdidas, admite alfa.
+- JPEG: con pérdidas, usa Y’CbCr y submuestreo de crominancia.
+- GIF: paleta indexada de hasta 256 colores, LZW sin pérdidas, transparencia y animación.
+
+> [!Example] Submuestreo de crominancia 4:2:0
+> En un bloque de $4\times2$ píxeles:
+> - 4:4:4 conserva $8+8+8=24$ valores.
+> - 4:2:2 conserva $8+4+4=16$.
+> - 4:2:0 conserva $8+2+2=12$.
+
+> [!Example] Ejercicio 3: submuestreo $5\times5$
+> **Datos**: RGB 24 bits; por cada bloque de $25$ píxeles se guardan $25$ valores Y’, $1$ Cb y $1$ Cr; cada componente 8 bits.
+> **Solución**:
+> - RGB: $25\cdot(8+8+8)=600$ bits.
+> - Y’CbCr: $(25+1+1)\cdot8=216$ bits.
+> - Factor: $600/216\approx2{,}78:1$.
+> - Ahorro aproximado: $64\%$.
+
+> [!Example] Ejercicio 4: RGB frente a paleta
+> **Datos**: imagen $1600\times900$; BMP RGB 24 bits; GIF con paleta de 256 colores; sin cabeceras ni LZW.
+> **a) Paleta**:
+> $$
+> 256\cdot3=768\ \text{B}.
+> $$
+> **b) Índices**:
+> $$
+> 1600\cdot900=1.440.000\ \text{píxeles}.
+> $$
+> Como $2^8=256$, cada índice ocupa 1 byte:
+> $$
+> 1.440.000\ \text{B}.
+> $$
+> Añadiendo la paleta una sola vez:
+> $$
+> 1.440.000+768=1.440.768\ \text{B}.
+> $$
+> **c) Factor**:
+> $$
+> \frac{1600\cdot900\cdot3}{1.440.768}
+> =\frac{4.320.000}{1.440.768}\approx3.
+> $$
+
+> [!Summary] Resumen ejecutivo L2.4
+> Una imagen de mapa de bits se calcula con ancho, alto y bits por píxel. JPEG aprovecha la menor sensibilidad al detalle de color; GIF usa paleta e índices; PNG es sin pérdidas. El tamaño final depende del formato y de la compresión.
+
+## 7. L2.5 Representación de vídeo
+
+### 7.1. Vídeo sin comprimir
+
+$$
+R=f_{\text{fps}}\cdot n_{\text{píxeles/imagen}}\cdot n_{\text{bits/píxel}}\ \text{bit/s}
+$$
+$$
+C=\frac{R\cdot t}{8}\ \text{bytes}
+$$
+
+> [!Example] $25$ fps, $640\times480$, 24 bits, 60 s
+> **Solución**:
+> $$
+> R=25\cdot(640\cdot480)\cdot24=184.320.000\ \text{bit/s}.
+> $$
+> $$
+> C=\frac{184.320.000\cdot60}{8}=1.382.400.000\ \text{B}\approx1{,}38\ \text{GB}.
+> $$
+
+### 7.2. GOP, I, P y B
+
+- I: imagen autónoma.
+- P: predictiva, referencia anterior.
+- B: bidireccional, referencias anterior y posterior.
+- El orden de decodificación puede diferir del orden de visualización.
+
+> [!Example] Ejercicio 1: vídeo de 5 minutos, 9.000 fotogramas de 1,4 MP
+> **Datos**: grupos I–P–B; I $3\ \text{B/píxel}$, P $1\ \text{B/píxel}$, B $0\ \text{B}$; $1\ \text{MP}=10^6$ píxeles; $1\ \text{GB}=10^9\ \text{B}$.
+> **Solución**:
+> - Grupos: $9.000/3=3.000$.
+> - I: $1.400.000\cdot3=4.200.000\ \text{B}=4{,}2\ \text{MB}$.
+> - P: $1.400.000\cdot1=1.400.000\ \text{B}=1{,}4\ \text{MB}$.
+> - B: $0$.
+> - Grupo: $5{,}6\ \text{MB}$.
+> - Total: $3.000\cdot5{,}6=16.800\ \text{MB}=16{,}8\ \text{GB}$.
+
+> [!Example] Ejercicio 2: $16{,}1\ \text{GB}$, $10$ min, grupos de 3
+> **Datos**: $16{,}1\ \text{GB}=16.100.000.000\ \text{B}$; $600\ \text{s}$; imagen $1600\times900$; I 16 bits/píxel, P 8 bits/píxel, B 0.
+> **Solución**:
+> - Píxeles: $1600\cdot900=1.440.000$.
+> - I: $1.440.000\cdot2=2.880.000\ \text{B}$.
+> - P: $1.440.000\cdot1=1.440.000\ \text{B}$.
+> - Grupo: $4.320.000\ \text{B}$.
+> - Grupos: $16.100.000.000/4.320.000\approx3.726{,}85$.
+> - Fotogramas: $3.726{,}85\cdot3\approx11.180{,}56$.
+> - fps: $11.180{,}56/600\approx18{,}63\ \text{fps}$.
+
+> [!Summary] Resumen ejecutivo L2.5
+> El vídeo sin comprimir multiplica fps, píxeles y bits por píxel. La compresión temporal usa referencias I, P y B. Contenedor y códec son distintos: el contenedor organiza pistas y el códec comprime/descomprime.
+
+## 8. L2.6 Representación de números enteros
+
+### 8.1. Sin signo
+
+Con $n$ bits:
+$$
+0\le N\le2^n-1.
+$$
+Con 8 bits: $0$ a $255$.
+
+> [!Example] 28 en 8 bits
+> $28=16+8+4=00011100_2$.
+
+### 8.2. Signo y magnitud (SM)
+
+- 1 bit de signo: $0$ positivo, $1$ negativo.
+- $n-1$ bits de magnitud.
+- Rango: $-(2^{n-1}-1)\le N\le2^{n-1}-1$.
+- Dos ceros: $+0$ y $-0$.
+
+> [!Example] $+28$ y $-28$ en SM de 8 bits
+> $+28=0\,0011100_2=1C_{16}$.
+> $-28=1\,0011100_2=9C_{16}$.
+
+> [!NonExample] El bit de signo no es una potencia positiva
+> En SM, el primer bit indica signo; no se suma como $2^{n-1}$.
+
+### 8.3. Complemento a 1 (CA1)
+
+- Positivos: binario natural.
+- Negativos: invertir todos los bits.
+- Rango: $-(2^{n-1}-1)\le N\le2^{n-1}-1$.
+- Dos ceros.
+
+> [!Example] CA1: $-37$ en 8 bits
+> $37=00100101_2$; invertir: $11011010_2=DA_{16}$.
+
+> [!Example] CA1: $D6_{16}$
+> $D6=11010110_2$; primer bit 1, negativo. Invertir: $00101001_2=41$. Valor: $-41$.
+
+### 8.4. Complemento a 2 (CA2)
+
+- Positivos: binario natural.
+- Negativos: valor absoluto $\to$ CA1 $\to$ sumar 1.
+- Rango: $-2^{n-1}\le N\le2^{n-1}-1$.
+- Un solo cero.
+
+> [!Example] CA2: $-28$ en 8 bits
+> $28=00011100_2$; CA1: $11100011_2$; sumar 1: $11100100_2=E4_{16}$.
+
+> [!Example] CA2: $D6_{16}$
+> $D6=11010110_2$; negativo. Invertir: $00101001_2$; sumar 1: $00101010_2=42$. Valor: $-42$.
+
+> [!Example] CA2: $-14+7$
+> **Solución**:
+> - $+14=00001110_2$; CA1: $11110001_2$; CA2: $11110010_2$.
+> - $+7=00000111_2$.
+> - Suma:
+> $$
+> 11110010+00000111=11111001_2.
+> $$
+> - $11111001_2$ es negativo; invertir y sumar 1 da $00000111_2=7$. Valor: $-7$.
+> - Está en rango; no hay desbordamiento.
+
+### 8.5. Sesgado
+
+$$
+\text{Código}=N+\text{Sesgo}
+$$
+Con $n$ bits y sesgo $2^{n-1}$:
+$$
+-S\le N\le(2^n-1)-S.
+$$
+
+> [!Example] $-18$ con 8 bits y sesgo 128
+> Código: $-18+128=110$.
+> $110=01101110_2=6E_{16}$.
+> Comprobación: $110-128=-18$.
+
+### 8.6. BCD
+
+Cada cifra decimal se codifica con 4 bits. Ejemplo: $729\to0111\ 0010\ 1001$.
+
+> [!NonExample] BCD no es binario natural del entero
+> $729$ en binario natural no es $0111\ 0010\ 1001$; en BCD se codifican las cifras 7, 2 y 9 por separado.
+
+### 8.7. Desbordamiento y acarreo
+
+> [!Warning] Acarreo no siempre es desbordamiento
+> - $127+1$ en CA2 de 8 bits da $10000000$, que se interpreta como $-128$: hay desbordamiento, pero no acarreo exterior.
+> - $-1+1$ da $0$ con acarreo exterior, pero no hay desbordamiento.
+
+> [!Summary] Resumen ejecutivo L2.6
+> SM y CA1 tienen dos ceros y rango simétrico. CA2 tiene un cero y rango asimétrico, y es la representación habitual de enteros con signo. Sesgado desplaza el intervalo. BCD codifica cifras decimales. El desbordamiento depende del rango, no solo del acarreo.
+
+## 9. L2.7 Representación de números reales
+
+### 9.1. Coma flotante
+
+Un número real se escribe como:
+$$
+N=S\cdot M\cdot b^E.
+$$
+En binario normalizado:
+$$
+1\le M<2.
+$$
+
+> [!Example] $53{,}25$ a binario
+> Parte entera: $53=110101_2$.
+> Parte fraccionaria: $0{,}25\cdot2=0{,}5\to0$; $0{,}5\cdot2=1\to1$.
+> Resultado: $53{,}25=110101{,}01_2$.
+> Normalizado: $1{,}1010101_2\cdot2^5$.
+
+### 9.2. IEEE 754
+
+Para binary32:
+- 1 bit de signo $s$.
+- 8 bits de exponente $e$.
+- 23 bits de mantisa fraccionaria $M_f$.
+- Sesgo $127$.
+- $E=e-127$.
+- $M=1+M_f$.
+- $N=(-1)^s(1+M_f)2^{e-127}$.
+
+Para binary64:
+- 1 bit de signo.
+- 11 bits de exponente.
+- 52 bits de mantisa fraccionaria.
+- Sesgo $1023$.
+
+> [!Example] Codificar $4_{10}$ en IEEE 754 de 32 bits
+> **Solución**:
+> - $4=100_2=1{,}00_2\cdot2^2$.
+> - $s=0$, $E=2$, $e=2+127=129=10000001_2$.
+> - $M_f=0$.
+> - Palabra: $0\ 10000001\ 00000000000000000000000$.
+> - Hexadecimal: $40800000_{16}$.
+
+> [!Example] Codificar $-11{,}0011_2$ en IEEE 754 de 32 bits
+> **Solución**:
+> - Signo: $s=1$.
+> - Valor absoluto normalizado: $1{,}10011_2\cdot2^1$.
+> - $E=1$, $e=1+127=128=10000000_2$.
+> - $M_f=10011000000000000000000$.
+> - Palabra: $1\ 10000000\ 10011000000000000000000$.
+> - Hexadecimal: $C04C0000_{16}$.
+
+> [!Example] Decodificar $01F80000_{16}$
+> **Solución**:
+> - Binario: $0000\ 0001\ 1111\ 1000\ \ldots$
+> - Campos: $s=0$, $e=00000011_2=3$, $M_f=1111000\ldots$
+> - $E=3-127=-124$.
+> - $M=1{,}1111_2=1{,}9375$.
+> - $N=(+1)\cdot1{,}9375\cdot2^{-124}\approx9{,}1100812\cdot10^{-38}$.
+
+> [!Example] Comprobación de 87
+> $87=1010111_2=1{,}010111_2\cdot2^6$.
+> $e=6+127=133=10000101_2$.
+> Palabra: $42AE0000_{16}$.
+
+### 9.3. Límites y casos especiales
+
+- Overflow: se supera la magnitud máxima.
+- Underflow: el resultado es demasiado pequeño y pierde precisión.
+- Valores especiales: $+0$, $-0$, infinitos, NaN.
+
+> [!NonExample] IEEE 754 no representa todos los reales
+> Es un conjunto finito de valores. Muchos reales se aproximan y se redondean.
+
+> [!Summary] Resumen ejecutivo L2.7
+> Un real en coma flotante se normaliza como $1{,}xxx\cdot2^E$. IEEE 754 almacena signo, exponente sesgado y mantisa fraccionaria sin el 1 implícito. Más bits de exponente amplían rango; más bits de mantisa aumentan precisión.
+
+## 10. Resumen de fórmulas
+
+| Concepto | Expresión | Notas |
+|---|---|---|
+| Valor posicional | $\sum a_i b^i$ | Base $b$ |
+| Binario a decimal | $\sum a_i2^i$ | Solo bits 1 aportan |
+| Decimal a binario | Divisiones entre 2 | Restos al revés |
+| Hexadecimal | 4 bits por cifra | $16=2^4$ |
+| Compresión | $f_c=C_a/C_d$ | $P_c=C_d/C_a\cdot100$ |
+| Nyquist | $f_s>2B$ | Límite teórico $2B$ |
+| PCM | $R=f_s n_s c$ | bit/s |
+| Tamaño audio | $C=R t/8$ | bytes |
+| Imagen | $C=ancho\cdot alto\cdot bpp/8$ | bytes |
+| Vídeo | $R=fps\cdot píxeles\cdot bpp$ | bit/s |
+| UTF-8 | 1–4 bytes según rango | Tabla de patrones |
+| CA1 | Invertir bits | Dos ceros |
+| CA2 | Invertir y sumar 1 | Un cero |
+| Sesgado | $C=N+S$ | $N=C-S$ |
+| IEEE 754 | $(-1)^s(1+M_f)2^{e-\text{sesgo}}$ | Normales |
+
+## 11. Mapeo de ejercicios
+
+| Nº | Enunciado breve | Dónde se resuelve |
+|---|---|---|
+| 2.0 | $(00001001)_2$ | [[#2.2. Binario]] |
+| 2.0 | $74$ a binario | [[#2.2. Binario]] |
+| 2.0 | $0{,}423$ a binario | [[#2.2. Binario]] |
+| 2.0 | $2A6_{16}$ | [[#2.3. Hexadecimal]] |
+| 2.0 | $678$ a hexadecimal | [[#2.3. Hexadecimal]] |
+| 2.0 | Suma binaria | [[#2.4. Aritmética binaria]] |
+| L2.1 | DNI, paridad, compresión 14 MB | [[#3. L2.1 Nociones básicas sobre representación de la información]] |
+| L2.2 | UTF-16 a UTF-8 | [[#4. L2.2 Representación de textos]] |
+| L2.2 | 139 KiB | [[#4. L2.2 Representación de textos]] |
+| L2.3 | frecuencia de muestreo | [[#5. L2.3 Representación de sonidos]] |
+| L2.3 | Nyquist | [[#5. L2.3 Representación de sonidos]] |
+| L2.4 | RGB $10\times15$ | [[#6. L2.4 Representación de imágenes]] |
+| L2.4 | grises $256\times256$ | [[#6. L2.4 Representación de imágenes]] |
+| L2.4 | submuestreo $5\times5$ | [[#6. L2.4 Representación de imágenes]] |
+| L2.4 | RGB frente a paleta | [[#6. L2.4 Representación de imágenes]] |
+| L2.5 | vídeo 5 min | [[#7. L2.5 Representación de vídeo]] |
+| L2.5 | $16{,}1$ GB y fps | [[#7. L2.5 Representación de vídeo]] |
+| L2.6 | CA1 $D6$ | [[#8. L2.6 Representación de números enteros]] |
+| L2.6 | CA2 $D6$ | [[#8. L2.6 Representación de números enteros]] |
+| L2.6 | sesgado $-18$ | [[#8. L2.6 Representación de números enteros]] |
+| L2.6 | $-14+7$ | [[#8. L2.6 Representación de números enteros]] |
+| L2.7 | codificar $4$ | [[#9. L2.7 Representación de números reales]] |
+| L2.7 | codificar $-11{,}0011_2$ | [[#9. L2.7 Representación de números reales]] |
+| L2.7 | decodificar $01F80000$ | [[#9. L2.7 Representación de números reales]] |
+
+## 12. Errores comunes y consejos
+
+> [!Warning] Confundir bits y bytes
+> Divide entre 8 al pasar de bits a bytes. No respondas $3.600\ \text{B}$ cuando has calculado $3.600$ bits.
+
+> [!Warning] Confundir KiB con kB
+> $1\ \text{KiB}=1024\ \text{B}$; $1\ \text{kB}=1000\ \text{B}$. El enunciado indica cuál usar.
+
+> [!Warning] Interpretar un patrón sin conocer la convención
+> $D6_{16}$ vale $-41$ en CA1 y $-42$ en CA2. El mismo patrón cambia de significado.
+
+> [!Tip] Comprobación decimal
+> En sumas, restas y conversiones, vuelve a decimal para verificar el resultado.
+
+> [!Tip] En IEEE 754, separa siempre los campos
+> Escribe primero $s$, $e$ y $M_f$; después aplica la fórmula. No interpretes la palabra hexadecimal como un entero.
+
+## 13. Síntesis
+
+> [!Summary]
+> La representación de la información exige dos cosas: una secuencia de bits y una convención para interpretarla. Los sistemas posicionales permiten cambiar de base sin cambiar el valor. Texto, sonido, imagen y vídeo se digitalizan con parámetros concretos: bits por carácter, frecuencia de muestreo, bits por píxel y fps. Los enteros usan convenciones como SM, CA1, CA2, sesgado o BCD; los reales usan coma flotante IEEE 754. En todos los casos hay límites de rango, precisión y tamaño.
+
+## 14. Anexos
+
+### 14.1. Rangos de ASCII
+
+| Rango hexadecimal | Contenido |
+|---|---|
+| $00$–$1F$ | Controles |
+| $20$ | Espacio |
+| $30$–$39$ | Cifras `0`–`9` |
+| $41$–$5A$ | Mayúsculas `A`–`Z` |
+| $61$–$7A$ | Minúsculas `a`–`z` |
+| $7F$ | DEL |
+
+### 14.2. UTF-8
+
+| Punto de código | Bytes | Patrón |
+|---|---:|---|
+| $U+0000$–$U+007F$ | 1 | `0xxxxxxx` |
+| $U+0080$–$U+07FF$ | 2 | `110xxxxx 10xxxxxx` |
+| $U+0800$–$U+FFFF$ | 3 | `1110xxxx 10xxxxxx 10xxxxxx` |
+| $U+10000$–$U+10FFFF$ | 4 | `11110xxx 10xxxxxx 10xxxxxx 10xxxxxx` |
+
+### 14.3. IEEE 754 binary32: casos especiales
+
+| Valor | Hexadecimal |
+|---|---|
+| $0$ | $00000000$ |
+| $\infty$ | $7F800000$ |
+| $-\infty$ | $FF800000$ |
+| NaN (ejemplo) | $7FC00000$ |
+| $1$ | $3F800000$ |
+
+### 14.4. Unidades
+
+| Unidad | Equivalencia |
+|---|---|
+| $1\ \text{B}$ | 8 bits |
+| $1\ \text{KiB}$ | $1024\ \text{B}$ |
+| $1\ \text{MiB}$ | $1024\ \text{KiB}$ |
+| $1\ \text{kB}$ | $1000\ \text{B}$ |
+| $1\ \text{MB}$ | $1000\ \text{kB}$ |
+
+## 15. Enlaces externos
+
+> [!Note] Recursos complementarios
+> Esta sección recopila los enlaces externos proporcionados en el material fuente original.
+
+### Documentación oficial
+- [Unicode FAQ: UTF-8, UTF-16, BOM](https://www.unicode.org/faq/utf_bom.html) — Preguntas oficiales sobre codificaciones UTF y BOM.
+- [Borrador público de C23 (N3096)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf) — Referencia sobre tipos enteros, CA2 y comportamiento del lenguaje C.
+
+### Referencias históricas
+- [Library of Congress: Sallie Gardner at a Gallop](https://www.loc.gov/item/97502309/) — Serie fotográfica de Muybridge sobre movimiento y percepción temporal.
+
+### Herramientas
+- [BinaryConvert: conversor IEEE 754](https://www.binaryconvert.com/convert_float.html) — Comprobación interactiva de patrones de coma flotante.
+
+---
+
+## Respuesta a tu pregunta: ¿qué he cambiado y está todo?
+
+He creado una nota única para Obsidian titulada **“Tema 2. Representación de la información en computadores”** siguiendo tus instrucciones:
+
+- He usado un solo `# Título principal`.
+- He incluido índice con enlaces internos `[[#...]]`.
+- He usado `$...$` y `$$...$$` para matemáticas, sin backticks alrededor de los delimitadores.
+- He empleado callouts `[!Definition]`, `[!Example]`, `[!Warning]`, `[!Tip]`, `[!Connection]`, `[!Summary]` y `[!NonExample]`.
+- He incluido tablas de fórmulas, rangos, UTF-8, IEEE 754 y unidades.
+- He resuelto los ejercicios numerados del PDF: binario, hexadecimal, UTF-8/UTF-16, audio, imagen, vídeo, enteros y reales.
+- He añadido sección de errores comunes, síntesis y enlaces externos con sintaxis Markdown `[texto](url)`, no wikilinks.
+
+**¿Está todo?** Están cubiertos todos los bloques principales L2.0–L2.7 y los ejercicios con sus resultados. No he copiado literalmente todas las diapositivas ni la tabla ASCII completa carácter por carácter; la he resumido por rangos y códigos clave, que es lo necesario para estudiar y resolver los ejercicios. Si quieres que expanda la tabla ASCII completa o que añada más ejemplos de un apartado concreto, dímelo y lo hago.

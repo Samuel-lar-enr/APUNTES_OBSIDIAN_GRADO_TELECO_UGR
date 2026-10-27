@@ -11,10 +11,14 @@
             "id": "28b53620dd715a1a",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "1/1.1/FUNDAMENTOS DE  INFORMATICA/FUNDAMENTOS DE INFORMÁTICA.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "FUNDAMENTOS DE INFORMÁTICA"
             }
           }
         ]
@@ -192,24 +196,25 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7b8bd6e27843445a",
+  "active": "28b53620dd715a1a",
   "lastOpenFiles": [
-    "1/1.1/FIE-H/FUNDAMENTOS DE INFORMÁTICA.md",
-    "1/1.1/FIE-H/APUNTES FUNDAMENTOS DE  INFORMATICA.md",
-    "1/1.1/FIE-EMP/FUNDAMENTOS DE  EMPRESA.md",
+    "1/1.1/FUNDAMENTOS DE  INFORMATICA/APUNTES FUNDAMENTOS DE  INFORMATICA.md",
+    "1/1.1/FUNDAMENTOS DE  EMPRESA/FUNDAMENTOS DE  EMPRESA.md",
+    "1/1.1/FUNDAMENTOS DE  EMPRESA/APUNTES FUNDAMENTOS DE  EMPRESA.md",
+    "1/1.1/FUNDAMENTOS DE  INFORMATICA/FUNDAMENTOS DE INFORMÁTICA.md",
+    "1/1.1/ANALISIS MATEMÁTICO/APUNTES ANALISIS MATEMÁTICO.md",
     "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA/APUNTES ÁLGEBRA LINEAL Y GEOMETRÍA.md",
     "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA/ÁLGEBRA LINEAL Y GEOMETRÍA.md",
-    "1/1.1/APUNTES ANALISIS MATEMÁTICO/APUNTES ANALISIS MATEMÁTICO.md",
-    "1/1.1/APUNTES ANALISIS MATEMÁTICO/ANALISIS MATEMÁTICO 1.md",
+    "1/1.1/ANALISIS MATEMÁTICO/ANALISIS MATEMÁTICO 1.md",
     "Sin título.canvas",
     "INSTRUCCIONES/Instrucciones para IA II Edición.md",
     "INSTRUCCIONES/Instrucciones para IA.md",
     "INSTRUCCIONES",
     "1/1.1/FUNDAMENTOS DE PROGRAMACIÓN/FUNDAMENTOS DE PROGRAMACIÓN.md",
-    "1/1.1/FIE-EMP",
-    "1/1.1/FIE-H",
+    "1/1.1/FUNDAMENTOS DE  EMPRESA",
+    "1/1.1/FUNDAMENTOS DE  INFORMATICA",
     "1/1.1/FUNDAMENTOS DE PROGRAMACIÓN",
-    "1/1.1/APUNTES ANALISIS MATEMÁTICO",
+    "1/1.1/ANALISIS MATEMÁTICO",
     "1/1.1/ÁLGEBRA LINEAL Y GEOMETRÍA",
     "Bienvenido.md",
     "1/1.1",

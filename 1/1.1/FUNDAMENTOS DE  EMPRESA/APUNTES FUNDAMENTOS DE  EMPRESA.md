@@ -1,0 +1,1 @@
+Probablemente no habrá pregunta de video para el primer parcial.
